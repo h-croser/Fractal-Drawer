@@ -1,2 +1,3 @@
-idea/*
+.idea/*
 output-imgs/*
+__pycache__/*
