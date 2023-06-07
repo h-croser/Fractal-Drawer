@@ -1,13 +1,11 @@
-from math import pi
+from math import radians
 
 # Tree params
+RADIANS_OFFSET: float = radians(30)
+LAYERS: int = 12
 
-DISTANCE_TRAVERSED: int = 1
-ANGLE_OFFSET: float = 13
-LAYERS: int = 15
-
-RADIANS_OFFSET: float = ANGLE_OFFSET * pi / 180
 
 # Figure params
-FIGURE_SIZE: float = 10
+FIGURE_SIZE: float = 13
 LINEWIDTH_STRAT: str = "normal"
+INVERTED: bool = False
