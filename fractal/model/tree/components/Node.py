@@ -1,6 +1,6 @@
 from math import sin, cos
 
-from tree.components.Point import Point
+from model.tree.components.Point import Point
 
 
 class Node:
