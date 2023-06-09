@@ -27,24 +27,26 @@ class Node:
     def get_line_coords_inverted(self, invert_x: bool = False, invert_y: bool = False) -> tuple[float, float]:
         return self.point.get_coords_inverted(invert_x=invert_x, invert_y=invert_y)
 
+    def is_leaf(self) -> bool:
+        return (self.left is None) and (self.right is None)
+
     def set_left(self, offset: float):
         self.left = Node()
         self.left.parent = self
         self.left.layer = self.layer + 1
-        self.left.radians_offset = self.radians_offset + offset
-        self.left.set_x(self.get_x() + sin(self.radians_offset + offset))
-        self.left.set_y(self.get_y() + cos(self.radians_offset + offset))
+        radians_offset_change: float = self.radians_offset + offset
+        self.left.radians_offset = radians_offset_change
+        self.left.set_x(self.get_x() + sin(radians_offset_change))
+        self.left.set_y(self.get_y() + cos(radians_offset_change))
 
     def set_right(self, offset: float):
         self.right = Node()
         self.right.parent = self
         self.right.layer = self.layer + 1
-        self.right.radians_offset = self.radians_offset - offset
-        self.right.set_x(self.get_x() + sin(self.radians_offset - offset))
-        self.right.set_y(self.get_y() + cos(self.radians_offset - offset))
-
-    def is_leaf(self) -> bool:
-        return (self.left is None) and (self.right is None)
+        radians_offset_change: float = self.radians_offset - offset
+        self.right.radians_offset = radians_offset_change
+        self.right.set_x(self.get_x() + sin(radians_offset_change))
+        self.right.set_y(self.get_y() + cos(radians_offset_change))
 
     def __str__(self) -> str:
         return f"Layer: {self.layer}\t\tx: {self.point.x}, y: {self.point.y}"

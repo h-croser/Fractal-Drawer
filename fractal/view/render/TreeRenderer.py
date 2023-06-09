@@ -43,7 +43,6 @@ class TreeRenderer:
                 line_widths_ls.append(line.line_width)
                 line_colors_ls.append(line.line_color)
 
-
         segments = np.array(line_coords_ls)
         line_widths = np.array(line_widths_ls)
         line_colors = np.array(line_colors_ls)
@@ -118,7 +117,7 @@ class TreeRenderer:
         return Line(point_a, point_b, line_width, line_color)
 
     def _get_line_width(self, node: Node, max_layers: int, branch_start_width: float, branch_end_width: float) -> float:
-        if max_layers < 1:
+        if max_layers <= 1:
             return branch_start_width
         linewidth_diff: float = branch_end_width - branch_start_width
         linewidth: float = branch_start_width + ((node.layer / max_layers) * linewidth_diff)
