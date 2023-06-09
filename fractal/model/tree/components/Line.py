@@ -11,5 +11,6 @@ class Line:
     def get_line_coords(self) -> list[tuple[float, float]]:
         return [(self.point_a.x, self.point_a.y), (self.point_b.x, self.point_b.y)]
 
-    def get_inverted_line_y_coords(self) -> list[tuple[float, float]]:
-        return [(self.point_a.x, -self.point_a.y), (self.point_b.x, -self.point_b.y)]
+    def get_line_coords_inverted(self, invert_x: bool = False, invert_y: bool = False) -> list[tuple[float, float]]:
+        return [self.point_a.get_coords_inverted(invert_x=invert_x, invert_y=invert_y),
+                self.point_b.get_coords_inverted(invert_x=invert_x, invert_y=invert_y)]

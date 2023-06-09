@@ -1,11 +1,10 @@
 from typing import Callable
 
-from matplotlib import pyplot as plt, gridspec
+from matplotlib import pyplot as plt
 from matplotlib.axes import Axes
 from matplotlib.figure import Figure, SubFigure
 from matplotlib.gridspec import GridSpec
 
-from model.FractalModel import FractalModel
 from model.tree.Tree import Tree
 from util.constants.constants import FIGURE_SIZE
 from util.constants.style_constants import *
@@ -14,7 +13,8 @@ from view.render.TreeRenderer import TreeRenderer
 
 
 class FractalViewWrapper:
-    def __init__(self, render_trigger: Callable, layer_setter: Callable, layer_getter: Callable, radians_offset_setter: Callable, radians_offset_getter: Callable):
+    def __init__(self, render_trigger: Callable, layer_setter: Callable, layer_getter: Callable,
+                 radians_offset_setter: Callable, radians_offset_getter: Callable):
         self.render_trigger: Callable = render_trigger
 
         # Set defaults
@@ -51,7 +51,10 @@ class FractalViewWrapper:
         self.renderer: TreeRenderer = TreeRenderer(self.ax)
 
         # Handle widgets
-        self.widget_manager: CustomWidgetManager = CustomWidgetManager(self.set_layers, self.layer_getter, self.set_radians_offset, self.radians_offset_getter)
+        self.widget_manager: CustomWidgetManager = CustomWidgetManager(self.set_layers, self.layer_getter,
+                                                                       self.set_radians_offset, self.radians_offset_getter,
+                                                                       self.set_mirror_state, self.get_mirror_state,
+                                                                       self.set_display_leaf, self.get_display_leaf)
         self.widget_manager.attach_widgets()
 
     def render(self, tree: Tree):
@@ -81,3 +84,17 @@ class FractalViewWrapper:
     def set_layers(self, layers: int):
         self.layer_setter(layers)
         self.render_trigger()
+
+    def set_mirror_state(self, mirror_state: bool):
+        self.mirrored = mirror_state
+        self.render_trigger()
+
+    def get_mirror_state(self) -> bool:
+        return self.mirrored
+
+    def set_display_leaf(self, display_leaf: bool):
+        self.display_leaf = display_leaf
+        self.render_trigger()
+
+    def get_display_leaf(self) -> bool:
+        return self.display_leaf

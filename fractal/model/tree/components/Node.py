@@ -24,6 +24,9 @@ class Node:
     def get_y(self) -> float:
         return self.point.y
 
+    def get_line_coords_inverted(self, invert_x: bool = False, invert_y: bool = False) -> tuple[float, float]:
+        return self.point.get_coords_inverted(invert_x=invert_x, invert_y=invert_y)
+
     def set_left(self, offset: float):
         self.left = Node()
         self.left.parent = self

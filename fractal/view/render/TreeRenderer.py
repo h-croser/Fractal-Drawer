@@ -30,18 +30,19 @@ class TreeRenderer:
 
         line_ls: list[Line] = self._build_line_ls(root, max_layers, branch_start_width, branch_end_width,
                                                   branch_start_color, branch_end_color)
-        leaf_point_ls: list[Point] = self._build_leaf_ls(root)
 
         line_coords_ls: list[list[tuple[float, float]]] = []
         line_widths_ls: list[float] = []
         line_colors_ls: list[list[float]] = []
         for line in line_ls:
             line_coords_ls.append(line.get_line_coords())
-            if mirrored:
-                line_coords_ls.append(line.get_inverted_line_y_coords())
-
             line_widths_ls.append(line.line_width)
             line_colors_ls.append(line.line_color)
+            if mirrored:
+                line_coords_ls.append(line.get_line_coords_inverted(invert_y=True))
+                line_widths_ls.append(line.line_width)
+                line_colors_ls.append(line.line_color)
+
 
         segments = np.array(line_coords_ls)
         line_widths = np.array(line_widths_ls)
@@ -51,6 +52,7 @@ class TreeRenderer:
         self.axes.add_collection(line_collection)
 
         if display_leaf:
+            leaf_point_ls: list[Point] = self._build_leaf_ls(root, mirrored)
             leaf_x_ls = np.array([point.x for point in leaf_point_ls])
             leaf_y_ls = np.array([point.y for point in leaf_point_ls])
 
@@ -83,7 +85,7 @@ class TreeRenderer:
 
         return line_ls
 
-    def _build_leaf_ls(self, root: Node) -> list[Point]:
+    def _build_leaf_ls(self, root: Node, mirrored: bool) -> list[Point]:
         leaf_point_ls: list[Point] = []
 
         queue: list[Node] = [root]
@@ -91,6 +93,9 @@ class TreeRenderer:
             node = queue.pop(0)
             if node.is_leaf():
                 leaf_point_ls.append(node.point)
+                if mirrored:
+                    mirrored_x, mirrored_y = node.get_line_coords_inverted(invert_y=True)
+                    leaf_point_ls.append(Point(mirrored_x, mirrored_y))
 
             if node.left is not None:
                 queue.append(node.left)
@@ -113,6 +118,8 @@ class TreeRenderer:
         return Line(point_a, point_b, line_width, line_color)
 
     def _get_line_width(self, node: Node, max_layers: int, branch_start_width: float, branch_end_width: float) -> float:
+        if max_layers < 1:
+            return branch_start_width
         linewidth_diff: float = branch_end_width - branch_start_width
         linewidth: float = branch_start_width + ((node.layer / max_layers) * linewidth_diff)
 
