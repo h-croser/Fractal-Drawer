@@ -1,5 +1,7 @@
-from math import radians
-from random import random, randrange, randint
+import decimal
+from decimal import Decimal
+from math import radians, degrees
+from random import randrange, randint
 
 from model.tree.Tree import Tree
 from util.constants.constants import MAX_LAYERS
@@ -7,12 +9,14 @@ from util.constants.constants import MAX_LAYERS
 
 class FractalModel:
     def __init__(self):
-        # Set initial values
-        rand_radians: float = radians(randint(0, 181))
-        rand_layers: int = randrange(0, MAX_LAYERS)
-        self.radians_offset: float = rand_radians
-        self.layers: int = rand_layers
+        decimal.getcontext().prec = 100
 
+        # Set initial values
+        rand_radians: Decimal = Decimal(radians(randint(0, 181)))
+        # rand_radians: Decimal = Decimal(radians(60))
+        rand_layers: int = randrange(0, MAX_LAYERS)
+        self.radians_offset: Decimal = rand_radians
+        self.layers: int = rand_layers
         self.tree: Tree = Tree()
 
         self.model_outdated: bool = True
@@ -22,12 +26,14 @@ class FractalModel:
             self.model_outdated = False
             self.tree.generate_fractal_tree(self.radians_offset, self.layers)
 
-    def set_radians_offset(self, radians_offset: float):
+    def set_radians_offset(self, radians_offset: Decimal | float):
+        if type(radians_offset) is float:
+            radians_offset = Decimal(radians_offset)
         if self.radians_offset != radians_offset:
             self.radians_offset = radians_offset
             self.model_outdated = True
 
-    def get_radians_offset(self) -> float:
+    def get_radians_offset(self) -> Decimal:
         return self.radians_offset
 
     def set_layers(self, layers: int):

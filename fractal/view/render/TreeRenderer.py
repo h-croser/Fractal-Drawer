@@ -1,5 +1,4 @@
 import numpy as np
-from matplotlib import pyplot as plt
 
 from matplotlib.axes import Axes
 from matplotlib.collections import LineCollection
@@ -7,7 +6,7 @@ from matplotlib.collections import LineCollection
 from model.tree.components.Line import Line
 from model.tree.components.Node import Node
 from model.tree.components.Point import Point
-from util.color.Gradient import Gradient
+from view.util.color.Gradient import Gradient
 from util.constants.style_constants import LEAF_NODE_STYLE
 
 
@@ -15,16 +14,8 @@ class TreeRenderer:
     def __init__(self, ax: Axes):
         self.axes: Axes = ax
 
-    def render_tree(self,
-                    root: Node,
-                    max_layers: int,
-                    branch_start_color: list[float],
-                    branch_end_color: list[float],
-                    leaf_color: list[float],
-                    branch_start_width: float,
-                    branch_end_width: float,
-                    display_leaf: bool,
-                    mirrored: bool):
+    def render_tree(self, root: Node, max_layers: int, branch_start_color: list[float], branch_end_color: list[float],
+                    leaf_color: list[float], branch_start_width: float, branch_end_width: float, display_leaf: bool, mirrored: bool):
         if type(root) is not Node:
             raise TypeError("root must be a Node")
 
@@ -35,11 +26,11 @@ class TreeRenderer:
         line_widths_ls: list[float] = []
         line_colors_ls: list[list[float]] = []
         for line in line_ls:
-            line_coords_ls.append(line.get_line_coords())
+            line_coords_ls.append(line.get_line_coords_float())
             line_widths_ls.append(line.line_width)
             line_colors_ls.append(line.line_color)
             if mirrored:
-                line_coords_ls.append(line.get_line_coords_inverted(invert_y=True))
+                line_coords_ls.append(line.get_line_coords_inverted_float(invert_y=True))
                 line_widths_ls.append(line.line_width)
                 line_colors_ls.append(line.line_color)
 

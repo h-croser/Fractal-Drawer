@@ -34,5 +34,9 @@ class AngleSliderWidget(Slider):
     def take_input(self, angle_val: float):
         if type(angle_val) is not float:
             raise TypeError("angle_val must be a float")
+        # Round to one decimal place to avoid floating point errors
+        rounded_angle: float = round(angle_val, 1)
+        # Set text representation manually to avoid a bug with off by 0.1
+        self.valtext.set_text(str(rounded_angle))
         radians_offset: float = radians(angle_val % 180)
         self.radians_offset_setter(radians_offset)

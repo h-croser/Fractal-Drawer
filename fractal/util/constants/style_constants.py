@@ -1,4 +1,4 @@
-from util.color.color import hex_to_rgba
+from view.util.color.color import hex_to_rgba
 
 # Line styles
 

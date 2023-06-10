@@ -1,3 +1,5 @@
+from decimal import Decimal
+
 from model.tree.components.Node import Node
 
 
@@ -5,8 +7,8 @@ class Tree:
     def __init__(self):
         self.root: Node = Node()
 
-    def generate_fractal_tree(self, radians_offset: float, num_layers: int):
-        if type(radians_offset) is not float:
+    def generate_fractal_tree(self, radians_offset: Decimal, num_layers: int):
+        if type(radians_offset) is not Decimal:
             raise TypeError("base_offset_radians must be float")
         if type(num_layers) is not int:
             raise TypeError("num_layers must be int")
@@ -15,7 +17,7 @@ class Tree:
             self.root.left = None
             return
 
-        first_node = Node(0.0, 1.0, layer=1)
+        first_node = Node(Decimal(0), Decimal(1), layer=1)
         first_node.parent = self.root
         self.root.left = first_node
 
