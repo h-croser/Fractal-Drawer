@@ -1,7 +1,7 @@
 from decimal import Decimal
 from math import sin, cos
 
-from model.tree.components.Point import Point
+from fractal.model.tree.components.Point import Point
 
 
 class Node:

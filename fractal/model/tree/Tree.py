@@ -1,6 +1,6 @@
 from decimal import Decimal
 
-from model.tree.components.Node import Node
+from fractal.model.tree.components.Node import Node
 
 
 class Tree:

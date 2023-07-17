@@ -3,10 +3,10 @@ from typing import Callable
 from matplotlib import pyplot as plt
 from matplotlib.axes import Axes
 
-from view.gui.widgets.AngleSliderWidget import AngleSliderWidget
-from view.gui.widgets.LayerSliderWidget import LayerSliderWidget
-from view.gui.widgets.MirrorCheckboxWidget import MirrorCheckboxWidget
-from view.gui.widgets.DisplayLeafCheckboxWidget import DisplayLeafCheckboxWidget
+from fractal.view.gui.widgets.AngleSliderWidget import AngleSliderWidget
+from fractal.view.gui.widgets.LayerSliderWidget import LayerSliderWidget
+from fractal.view.gui.widgets.MirrorCheckboxWidget import MirrorCheckboxWidget
+from fractal.view.gui.widgets.DisplayLeafCheckboxWidget import DisplayLeafCheckboxWidget
 
 
 class CustomWidgetManager:

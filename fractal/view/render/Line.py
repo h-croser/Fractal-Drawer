@@ -1,14 +1,15 @@
 from decimal import Decimal
 
-from model.tree.components.Point import Point
+from fractal.model.tree.components.Point import Point
+from fractal.view.util.color.Color import Color
 
 
 class Line:
-    def __init__(self, point_a: Point, point_b: Point, line_width: float, line_color: list[float]):
+    def __init__(self, point_a: Point, point_b: Point, line_width: float, line_color: Color):
         self.point_a: Point = point_a
         self.point_b: Point = point_b
         self.line_width: float = line_width
-        self.line_color: list[float] = line_color
+        self.line_color: Color = line_color
 
     def get_line_coords(self) -> list[tuple[Decimal, Decimal]]:
         return [self.point_a.get_coords(), self.point_b.get_coords()]

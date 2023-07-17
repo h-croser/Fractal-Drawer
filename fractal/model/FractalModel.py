@@ -1,10 +1,10 @@
 import decimal
 from decimal import Decimal
-from math import radians, degrees
+from math import radians
 from random import randrange, randint
 
-from model.tree.Tree import Tree
-from util.constants.constants import MAX_LAYERS
+from fractal.model.tree.Tree import Tree
+from fractal.util.constants.constants import MAX_LAYERS
 
 
 class FractalModel:
@@ -13,8 +13,7 @@ class FractalModel:
 
         # Set initial values
         rand_radians: Decimal = Decimal(radians(randint(0, 181)))
-        # rand_radians: Decimal = Decimal(radians(60))
-        rand_layers: int = randrange(0, MAX_LAYERS)
+        rand_layers: int = randrange(1, MAX_LAYERS//2)
         self.radians_offset: Decimal = rand_radians
         self.layers: int = rand_layers
         self.tree: Tree = Tree()
