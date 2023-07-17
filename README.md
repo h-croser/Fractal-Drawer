@@ -17,18 +17,18 @@ Use the mirror checkbox to mirror the tree along the x-axis. Use the show leaf c
 
 ## Examples
 
-[example-1](example-imgs/example-1.png)
+<img src="example-imgs/example-1.png" alt="example-1" width="800">
 
-[example-2](example-imgs/example-2.png)
+<img src="example-imgs/example-2.png" alt="example-2" width="800">
 
-[example-3](example-imgs/example-3.png)
+<img src="example-imgs/example-3.png" alt="example-3" width="800">
 
-[example-4](example-imgs/example-4.png)
+<img src="example-imgs/example-4.png" alt="example-4" width="800">
 
-[example-5](example-imgs/example-5.png)
+<img src="example-imgs/example-5.png" alt="example-5" width="800">
 
-[leaves-example](example-imgs/leaves-example.png)
+<img src="example-imgs/leaves-example.png" alt="leaves-example" width="800">
 
-[mirror-example](example-imgs/mirror-example.png)
+<img src="example-imgs/mirror-example.png" alt="mirror-example" width="800">
 
-[mirror-leaves-example](example-imgs/mirror-leaves-example.png)
+<img src="example-imgs/mirror-leaves-example.png" alt="mirror-leaves-example" width="800">
